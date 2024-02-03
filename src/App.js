@@ -8,6 +8,8 @@ import Store from "./components/Store";
 import DetailsPage from "./components/DetailsPage";
 import ShopCard from "./components/ShopCard";
 import Layout from "./components/Layout";
+import Login from "./components/Login/Login";
+import Signup from "./components/Signup";
 
 const App = () => {
   return (
@@ -15,8 +17,10 @@ const App = () => {
       <CardContextProvider>
         <Layout>
           <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
             <Route path="/products" element={<Store />} />
-            <Route path="/cards" element={<ShopCard />} />
+            <Route path="/cart" element={<ShopCard />} />
             <Route path="/products/:id" element={<DetailsPage />} />
             <Route path="/*" element={<Navigate to="/products" />} />
           </Routes>

@@ -1,17 +1,18 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link , useNavigate} from "react-router-dom";
 import swal from "sweetalert";
 import Button from "@mui/material/Button";
 import { Box, Typography } from "@mui/material";
 // Components
 import Card from "./Card";
+import toast, { Toaster } from 'react-hot-toast';
 
 // Context
 import { CardContext } from "../contexts/CardContextProvider";
 
 const ShopCard = () => {
   const { state, dispatch } = useContext(CardContext);
-
+  const navigate = useNavigate();
   return (
     <Box component="div" className="shopCard-container">
       <Box component="div" className="checkout-container">
@@ -63,7 +64,17 @@ const ShopCard = () => {
               <Button
                 variant="contained"
                 color="success"
-                onClick={() => dispatch({ type: "CHECKOUT" })}
+                onClick={() => {
+                  if(localStorage.getItem("token") != null && localStorage.getItem("token") != ""){
+                    dispatch({ type: "CHECKOUT" })
+                  }else{
+                    toast.error('Please Login to checkout');
+                    setTimeout(()=>{
+                      navigate('/login')
+                    },300)
+                  }
+                } 
+              }
               >
                 Check Out
               </Button>
@@ -107,6 +118,7 @@ const ShopCard = () => {
           <Card key={item.id} data={item} />
         ))}
       </Box>
+      <Toaster/>
     </Box>
   );
 };

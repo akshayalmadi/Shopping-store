@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { BsFillPersonFill,BsFillHandbagFill,BsSearch } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import {
   Typography,
@@ -31,16 +32,33 @@ const Navbar = () => {
         >
           <Link to="/products">
             <Typography variant="h6" component="div" color="text.secondary">
-              Store
+            <BsFillHandbagFill className="bag-icon"/>  Product Store
             </Typography>
           </Link>
-          <Link to="/cards">
+          <Toolbar
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            gap : "20px",
+            justifyItems : "center"
+          }}
+        >
+          <Link to="/cart">
             <IconButton>
               <Badge badgeContent={state.itemsCounter} color="info">
                 <ShoppingCartIcon color="action" sx={{ fontSize: "30px" }} />
               </Badge>
             </IconButton>
           </Link>
+          <Link to="/login">
+            <Typography variant="h5" component="div" color="text.secondary" sx={{
+            transform: "translateY(-40%)",
+            position: "absolute",
+          }}>
+              <BsFillPersonFill className="profile"/>
+            </Typography>
+          </Link>
+          </Toolbar>
         </Toolbar>
       </Container>
     </AppBar>
