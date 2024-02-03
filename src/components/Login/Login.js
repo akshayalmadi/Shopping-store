@@ -20,7 +20,7 @@ import { LoginApi } from "../../services/login";
     setFormData((prevState) => ({
       ...prevState,
       [name]: value,
-    }));
+    })); 
   }
   const getToken = async () => {
     if(formData.username && formData.password){
